@@ -1,0 +1,60 @@
+version: '3.5'
+
+x-server: &base_server_setup
+  image: smart-banquet-server:latest
+  build: .
+  stdin_open: true
+  tty: true
+  environment:
+    DB_HOST: ${DB_HOST:-db}
+    DB_NAME: ${DB_NAME:-postgres}
+    DB_USER: ${DB_USER:-postgres}
+    DB_PASSWORD: ${DB_PASSWORD:-postgres}
+    DJANGO_DEBUG: ${DJANGO_DEBUG:-true}
+    CELERY_REDIS_URL: ${CELERY_REDIS_URL:-redis://redis:6379/0}
+    CACHE_REDIS_URL: ${CACHE_REDIS_URL:-redis://redis:6379/1}
+  env_file:
+    - .env
+  volumes:
+    - .:/code
+  depends_on:
+    - db
+    - redis
+
+services:
+  db:
+    image: postgis/postgis:13-3.1-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - smart_postgres_data_13:/var/lib/postgresql/data/
+
+  redis:
+    image: redis:alpine
+    volumes:
+      - redis-data:/redis_data
+    networks:
+      - default
+    ports:
+      - "6379:6379"
+
+  web:
+    <<: *base_server_setup
+    ports:
+      - "9001:9001"
+    command: python manage.py runserver 0.0.0.0:9001
+
+  celery:
+    <<: *base_server_setup
+    command: bash -c "celery -A main worker --loglevel=info"
+
+volumes:
+  smart_postgres_data_13:
+  redis-data:

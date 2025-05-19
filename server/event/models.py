@@ -13,7 +13,7 @@ class Event(models.Model):
     is_active = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ['event_date']
+        ordering = ["event_date"]
 
     def __str__(self):
         return f"{self.title} - {self.event_date.strftime('%Y-%m-%d %H:%M')}"
@@ -25,28 +25,20 @@ class Event(models.Model):
 
 class Booking(models.Model):
     class StatusChoices(models.TextChoices):
-        CONFIRMED = 'confirmed', 'Confirmed'
-        PENDING = 'pending', 'Pending'
-        CANCELLED = 'cancelled', 'Cancelled'
+        CONFIRMED = "confirmed", "Confirmed"
+        PENDING = "pending", "Pending"
+        CANCELLED = "cancelled", "Cancelled"
 
-    event = models.ForeignKey(
-        Event,
-        on_delete=models.CASCADE,
-        related_name='bookings'
-    )
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="bookings")
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=15)
     booking_date = models.DateTimeField(default=timezone.now)
-    status = models.CharField(
-        max_length=20,
-        choices=StatusChoices.choices,
-        default=StatusChoices.PENDING
-    )
+    status = models.CharField(max_length=20, choices=StatusChoices.choices, default=StatusChoices.PENDING)
 
     class Meta:
-        ordering = ['booking_date']
+        ordering = ["booking_date"]
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.event.title}"

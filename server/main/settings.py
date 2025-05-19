@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     "guardian",
     # Local Apps
     "event",
+    "restaurant",
 ]
 
 MIDDLEWARE = [

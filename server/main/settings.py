@@ -14,48 +14,33 @@ from pathlib import Path
 
 import environ
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 env = environ.Env(
     DJANGO_DEBUG=(bool, False),
     DJANGO_SECRET_KEY=str,
     DJANGO_CORS_ORIGIN_REGEX_WHITELIST=(list, []),
-    # Database
     DB_NAME=str,
     DB_USER=str,
     DB_PASSWORD=str,
     DB_HOST=str,
     DB_PORT=int,
-    # Redis
     CELERY_REDIS_URL=str,
     DJANGO_CACHE_REDIS_URL=str,
-    # -- For running test (Optional)
     TEST_DJANGO_CACHE_REDIS_URL=(str, None),
-    # Static, Media configs
     DJANGO_STATIC_URL=(str, "/static/"),
     DJANGO_MEDIA_URL=(str, "/media/"),
-    # -- File System
     DJANGO_STATIC_ROOT=(str, os.path.join(BASE_DIR, "static")),
     DJANGO_MEDIA_ROOT=(str, os.path.join(BASE_DIR, "media")),
-    # Testing
     PYTEST_XDIST_WORKER=(str, None),
     CHATGPT_API_KEY=(str, None),
 )
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DJANGO_DEBUG")
 
 ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOST")
-
-# Application definition
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -82,6 +67,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "guardian",
     # Local Apps
+    "event",
 ]
 
 MIDDLEWARE = [
@@ -119,10 +105,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "main.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
 DATABASES = {
     "default": {
         "ENGINE": "django.contrib.gis.db.backends.postgis",
@@ -135,9 +117,6 @@ DATABASES = {
     },
 }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -154,9 +133,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/4.2/topics/i18n/
-
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = env("DJANGO_TIME_ZONE")
@@ -166,13 +142,9 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
 STATIC_URL = env("DJANGO_STATIC_URL")
 MEDIA_URL = env("DJANGO_MEDIA_URL")
 
-# Default
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
@@ -185,39 +157,13 @@ STORAGES = {
 STATIC_ROOT = env("DJANGO_STATIC_ROOT")
 MEDIA_ROOT = env("DJANGO_MEDIA_ROOT")
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ORIGIN_WHITELIST = ("http://localhost:5173", "http://localhost:9001")
-# CORS_ALLOW_METHODS = (
-#     "DELETE",
-#     "GET",
-#     "OPTIONS",
-#     "PATCH",
-#     "POST",
-#     "PUT",
-# )
-
-# CORS_ALLOW_HEADERS = (
-#     "accept",
-#     "accept-encoding",
-#     "authorization",
-#     "content-type",
-#     "dnt",
-#     "origin",
-#     "user-agent",
-#     "x-csrftoken",
-#     "x-requested-with",
-#     "sentry-trace",
-# )
 
 
-# See if we are inside a test environment (pytest)
 TESTING = (
     any(
         [
@@ -230,7 +176,6 @@ TESTING = (
                 "/usr/local/bin/py.test",
                 "/usr/local/lib/python3.12/dist-packages/py/test.py",
             ]
-            # Provided by pytest-xdist
         ]
     )
     or env("PYTEST_XDIST_WORKER") is not None
@@ -268,26 +213,13 @@ TINYMCE_DEFAULT_CONFIG = {
         | link visualchars charmap image hr nonbreaking | code preview fullscreen
         """,
     "paste_data_images": False,
-    "force_p_newlines": True,  # TODO: could be False?
-    "force_br_newlines": True,  # TODO: could be False?
+    "force_p_newlines": True,
+    "force_br_newlines": True,
     "forced_root_block": "",
     "contextmenu": "formats | link",
     "menubar": False,
     "statusbar": False,
-    "invalid_styles": {"*": "opacity"},  # Global invalid style
-    # https://www.tiny.cloud/docs/configure/content-filtering/#invalid_styles
-    # "extended_valid_elements": "iframe[src|frameborder|style|scrolling|class|width|height|name|align]",
-    # If more formatting possibilities needed (or more rows), choose from these:
-    # "toolbar1": """,
-    # fullscreen preview bold italic underline | fontselect,
-    # fontsizeselect  | forecolor backcolor | alignleft alignright |
-    # aligncenter alignjustify | indent outdent | bullist numlist table |
-    # | link image media | codesample |
-    # """,
-    # "toolbar2": """
-    # visualblocks visualchars |
-    # charmap hr pagebreak nonbreaking anchor |  code |
-    # """,
+    "invalid_styles": {"*": "opacity"},
 }
 
 ASGI_APPLICATION = "main.asgi.application"
@@ -331,7 +263,7 @@ LOGGING = {
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Smart Banquet API",
-    "DESCRIPTION": "Health App API Documenation",
+    "DESCRIPTION": "Smart Banquet API Documenation",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
 }

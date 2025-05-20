@@ -1,8 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 
-// Animation variants
 const sectionVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -25,9 +23,67 @@ const buttonVariants = {
   hover: { scale: 1.05, backgroundColor: '#B8972F', transition: { duration: 0.3 } },
 };
 
+const messageVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
 interface ContactUsSectionProps {}
 
+interface FormData {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
 const ContactUsSection: React.FC<ContactUsSectionProps> = () => {
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+  const [status, setStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+      setStatus({ type: 'error', message: 'All fields are required.' });
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:9001/api/contact/create/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setStatus({ type: 'success', message: 'Message sent successfully!' });
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => {
+          setStatus(null);
+        }, 3000);
+      } else {
+        setStatus({ type: 'error', message: result.message || 'Failed to send message.' });
+      }
+    } catch (error) {
+      setStatus({ type: 'error', message: 'An error occurred. Please try again later.' });
+    }
+  };
+
   return (
     <motion.section
       className="relative py-12 bg-gradient-to-b from-gray-100 to-white overflow-hidden"
@@ -45,12 +101,26 @@ const ContactUsSection: React.FC<ContactUsSectionProps> = () => {
         >
           Contact Us
           <motion.div
-            className="absolute bottom-0 left-1/2 w-0 h-1 bg-[#D4AF37]"
+            className="absolute bottom-0 left-1/2 w-0 h-1"
             initial={{ width: 0 }}
             animate={{ width: '20%' }}
             transition={{ duration: 1, ease: 'easeOut', delay: 0.5 }}
           />
         </motion.h2>
+
+        {status.type && (
+          <motion.div
+            className={`p-4 mb-6 text-center rounded-lg ${
+              status.type === 'success' ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'
+            }`}
+            variants={messageVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+          >
+            {status.message}
+          </motion.div>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <motion.div className="space-y-6" variants={textVariants}>
@@ -72,7 +142,7 @@ const ContactUsSection: React.FC<ContactUsSectionProps> = () => {
           </motion.div>
 
           <motion.div variants={textVariants}>
-            <form className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label htmlFor="name" className="block text-gray-700 font-medium mb-1">
                   Name
@@ -81,6 +151,8 @@ const ContactUsSection: React.FC<ContactUsSectionProps> = () => {
                   type="text"
                   id="name"
                   name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
                   required
                 />
@@ -93,6 +165,8 @@ const ContactUsSection: React.FC<ContactUsSectionProps> = () => {
                   type="email"
                   id="email"
                   name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
                   required
                 />
@@ -105,6 +179,8 @@ const ContactUsSection: React.FC<ContactUsSectionProps> = () => {
                   type="text"
                   id="subject"
                   name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
                   className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
                   required
                 />
@@ -116,6 +192,8 @@ const ContactUsSection: React.FC<ContactUsSectionProps> = () => {
                 <textarea
                   id="message"
                   name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   rows={4}
                   className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
                   required

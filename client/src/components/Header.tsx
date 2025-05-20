@@ -33,25 +33,27 @@ const textVariants = {
 const Header: React.FC<HeaderProps> = () => {
   return (
     <motion.header
-      className="bg-[#6B1D2A] text-[#D4AF37] py-4 px-6 flex justify-between items-center"
+      className="bg-[#92a85f] text-black py-4 px-4 sm:px-6 md:px-6 lg:px-8 flex flex-col md:flex-row justify-around items-center font-medium"
       variants={headerVariants}
       initial="hidden"
       animate="visible"
     >
       <motion.div
-        className="flex items-center space-x-2"
+        className="flex items-center space-x-2 mb-2 md:mb-0"
         variants={textVariants}
         initial="hidden"
         animate="visible"
         custom="left"
       >
         <motion.div whileHover="hover" variants={iconVariants}>
-          <HomeIcon className="w-5 h-5 ml-64" />
+          <HomeIcon className="w-5 h-5" />
         </motion.div>
-        <span className="text-sm">Bharatpur-12, Basanta-Chowk, Chitwan, Nepal</span>
+        <span className="text-xs sm:text-sm md:text-sm lg:text-base">
+          Bharatpur-12, Basanta-Chowk, Chitwan, Nepal
+        </span>
       </motion.div>
       <motion.div
-        className="flex items-center space-x-2 mr-64"
+        className="flex items-center space-x-2"
         variants={textVariants}
         initial="hidden"
         animate="visible"
@@ -60,7 +62,7 @@ const Header: React.FC<HeaderProps> = () => {
         <motion.div whileHover="hover" variants={iconVariants}>
           <EnvelopeClosedIcon className="w-5 h-5" />
         </motion.div>
-        <span className="text-sm">+056-420264</span>
+        <span className="text-xs sm:text-sm md:text-sm lg:text-base">+056-420264</span>
       </motion.div>
     </motion.header>
   );

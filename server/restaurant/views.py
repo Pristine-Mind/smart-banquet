@@ -12,8 +12,6 @@ from .serializers import (
 
 
 class RestaurantCreateAPIView(views.APIView):
-    permission_classes = [IsAdminUser]
-
     def post(self, request):
         serializer = RestaurantSerializer(data=request.data)
         if serializer.is_valid():
@@ -23,8 +21,6 @@ class RestaurantCreateAPIView(views.APIView):
 
 
 class BookingCreateAPIView(views.APIView):
-    permission_classes = [IsAuthenticated]
-
     def post(self, request):
         serializer = BookingSerializer(data=request.data)
         if serializer.is_valid():

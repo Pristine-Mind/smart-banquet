@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { HomeIcon } from '@radix-ui/react-icons';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -22,34 +22,76 @@ const logoVariants = {
   hover: { scale: 1.2, transition: { duration: 0.3 } },
 };
 
+const mobileMenuVariants = {
+  hidden: { opacity: 0, height: 0 },
+  visible: {
+    opacity: 1,
+    height: 'auto',
+    transition: { duration: 0.3, ease: 'easeOut' },
+  },
+};
+
 interface NavbarProps {}
 
 const Navbar: React.FC<NavbarProps> = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((prev) => !prev);
+  };
+
+  const navItems = ['Home', 'About', 'Services', 'Restaurant', 'Gallery', 'Contact Us'];
+
   return (
     <motion.nav
-      className="bg-white shadow-md py-4 px-6 flex justify-between items-center"
+      className="bg-white shadow-md py-4 px-4 sm:px-6 md:px-6 lg:px-8 flex justify-between items-center relative z-40"
       variants={navbarVariants}
       initial="hidden"
       animate="visible"
     >
       <motion.div
-        className="flex items-center space-x-2 ml-64"
+        className="flex items-center space-x-2"
         whileHover="hover"
         variants={logoVariants}
       >
         <Link to="/">
           <div className="flex items-center space-x-2">
             <HomeIcon className="w-6 h-6 text-red-600" />
-            <span className="text-xl font-bold text-gray-800">SMART GARDEN</span>
+            <span className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold text-gray-800">SMART GARDEN</span>
           </div>
         </Link>
       </motion.div>
 
-      <ul className="flex space-x-10 mr-64">
-        {['Home', 'About', 'Services', 'Restaurant', 'Gallery', 'Contact Us'].map((item) => (
+      <div className="md:hidden">
+        <button
+          onClick={toggleMobileMenu}
+          className="flex flex-col justify-center items-center w-8 h-8 focus:outline-none"
+          aria-label="Toggle navigation menu"
+          aria-expanded={isMobileMenuOpen}
+        >
+          <span
+            className={`block w-6 h-0.5 bg-gray-600 transform transition-transform duration-300 ${
+              isMobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''
+            }`}
+          />
+          <span
+            className={`block w-6 h-0.5 bg-gray-600 my-1 transition-opacity duration-300 ${
+              isMobileMenuOpen ? 'opacity-0' : ''
+            }`}
+          />
+          <span
+            className={`block w-6 h-0.5 bg-gray-600 transform transition-transform duration-300 ${
+              isMobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''
+            }`}
+          />
+        </button>
+      </div>
+
+      <ul className="hidden md:flex md:space-x-4 lg:space-x-8">
+        {navItems.map((item) => (
           <motion.li
             key={item}
-            className="text-gray-600 hover:text-gray-900 cursor-pointer font-bold"
+            className="text-gray-600 hover:text-gray-900 cursor-pointer font-bold text-sm md:text-sm lg:text-base"
             whileHover="hover"
             variants={linkVariants}
           >
@@ -59,6 +101,29 @@ const Navbar: React.FC<NavbarProps> = () => {
           </motion.li>
         ))}
       </ul>
+
+      <motion.div
+        className="fixed top-16 left-0 w-full bg-white bg-opacity-95 shadow-md md:hidden overflow-hidden z-50"
+        variants={mobileMenuVariants}
+        initial="hidden"
+        animate={isMobileMenuOpen ? 'visible' : 'hidden'}
+      >
+        <ul className="flex flex-col items-center space-y-4 py-6">
+          {navItems.map((item) => (
+            <motion.li
+              key={item}
+              className="text-gray-600 hover:text-gray-900 cursor-pointer font-bold text-lg"
+              whileHover="hover"
+              variants={linkVariants}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <Link to={`/${item.toLowerCase().replace(' ', '-')}`}>
+                {item}
+              </Link>
+            </motion.li>
+          ))}
+        </ul>
+      </motion.div>
     </motion.nav>
   );
 };

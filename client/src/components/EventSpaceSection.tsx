@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const spaces = [
   {
     name: 'Grand Banquet Hall',
-    image: 'https://images.unsplash.com/photo-1519167758481-83f550bbae11?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1677129663241-5be1f17fe6fe?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YmFucXVldCUyMGhhbGx8ZW58MHx8MHx8fDA%3D',
     description: 'Our Grand Banquet Hall is perfect for weddings and large celebrations, accommodating up to 200 guests with elegant decor.',
   },
   {
@@ -14,7 +14,7 @@ const spaces = [
   },
   {
     name: 'Outdoor Party Terrace',
-    image: 'https://images.unsplash.com/photo-1594057742958-1a4a1d1d1f2c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1636061140114-fb636ae54dda?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fG91dGRvb3IlMjBwYXJ0eSUyMHRlcnJhY2V8ZW58MHx8MHx8fDA%3D',
     description: 'Host your next event on our Outdoor Party Terrace, offering a vibrant setting for up to 100 guests with stunning views.',
   },
 ];

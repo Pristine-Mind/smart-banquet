@@ -51,7 +51,7 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
         >
           About Us
           <motion.div
-            className="absolute bottom-0 left-1/2 w-0 h-2 bg-[#D4AF37]"
+            className="absolute bottom-0 left-1/2 w-0 h-2"
             initial={{ width: 0 }}
             animate={{ width: '40%' }}
             transition={{ duration: 1, ease: 'easeOut', delay: 0.5 }}
@@ -127,18 +127,6 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
               </ul>
             </motion.div>
           </div>
-          <motion.div className="text-center mt-8" variants={textVariants}>
-            <Link to="/services">
-              <motion.button
-                className="px-6 py-3 text-white font-medium rounded-lg"
-                variants={buttonVariants}
-                initial="rest"
-                whileHover="hover"
-              >
-                Learn More
-              </motion.button>
-            </Link>
-          </motion.div>
         </motion.div>
       </div>
     </motion.section>

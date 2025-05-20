@@ -7,6 +7,7 @@ import Gallery from './pages/Gallery';
 import ContactUs from './pages/ContactUs';
 import Restaurant from './pages/Restaurant';
 
+
 const App: React.FC = () => {
   return (
     <Router>

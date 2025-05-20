@@ -49,7 +49,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = () => {
         >
           Our Services
           <motion.div
-            className="absolute bottom-0 left-1/2 w-0 h-1 bg-[#D4AF37]"
+            className="absolute bottom-0 left-1/2 w-0 h-1"
             initial={{ width: 0 }}
             animate={{ width: '20%' }}
             transition={{ duration: 1, ease: 'easeOut', delay: 0.5 }}

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -70,17 +71,17 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
     event_title: '',
   });
   const [status, setStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
+  const formRef = useRef<HTMLFormElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setBookingData((prev) => {
       const updatedData = { ...prev, [name]: value };
-
       return updatedData;
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const requiredFields = ['user_username', 'user_email', 'booking_date', 'start_time', 'party_size'];
@@ -90,52 +91,46 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
       return;
     }
 
-    const payload: BookingData = {
-      user_username: bookingData.user_username,
-      user_email: bookingData.user_email,
-      booking_type: bookingData.booking_type,
-      restaurant_name: bookingData.restaurant_name,
-      restaurant_city: bookingData.restaurant_city,
-      booking_date: bookingData.booking_date,
-      start_time: bookingData.start_time,
-      party_size: bookingData.party_size,
-      special_requests: bookingData.special_requests,
-    };
+    if (bookingData.booking_type === 'EVENT' && !bookingData.event_title) {
+      setStatus({ type: 'error', message: 'Event title is required for event bookings.' });
+      return;
+    }
 
-    try {
-      const response = await fetch('http://localhost:9001/api/bookings/create/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
+    setStatus({ type: null, message: 'Submitting booking...' });
 
-      const result = await response.json();
-
-      if (response.ok) {
-        setStatus({ type: 'success', message: 'Booking submitted successfully!' });
-        setBookingData({
-          user_username: '',
-          user_email: '',
-          booking_type: 'TABLE',
-          restaurant_name: 'Smart Banquet and Resort',
-          restaurant_city: 'Chitwan',
-          booking_date: '',
-          start_time: '',
-          party_size: '',
-          special_requests: '',
-          event_title: '',
-        });
-        setTimeout(() => {
-          setIsModalOpen(false);
-          setStatus({ type: null, message: '' });
-        }, 2000);
-      } else {
-        setStatus({ type: 'error', message: result.message || 'Failed to submit booking.' });
-      }
-    } catch (error) {
-      setStatus({ type: 'error', message: 'An error occurred. Please try again later.' });
+    if (formRef.current) {
+      emailjs
+        .sendForm(
+          'YOUR_SERVICE_ID',
+          'YOUR_TEMPLATE_ID',
+          formRef.current,
+          'YOUR_PUBLIC_KEY'
+        )
+        .then(
+          () => {
+            setStatus({ type: 'success', message: 'Booking submitted successfully!' });
+            setBookingData({
+              user_username: '',
+              user_email: '',
+              booking_type: 'TABLE',
+              restaurant_name: 'Smart Banquet and Resort',
+              restaurant_city: 'Chitwan',
+              booking_date: '',
+              start_time: '',
+              party_size: '',
+              special_requests: '',
+              event_title: '',
+            });
+            setTimeout(() => {
+              setIsModalOpen(false);
+              setStatus({ type: null, message: '' });
+            }, 2000);
+          },
+          (error) => {
+            setStatus({ type: 'error', message: 'Failed to submit booking. Please try again.' });
+            console.error('EmailJS error:', error.text);
+          }
+        );
     }
   };
 
@@ -212,7 +207,7 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
               </motion.div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label htmlFor="user_username" className="block text-gray-700 font-medium mb-1">
                   Name
@@ -267,7 +262,7 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
                   name="booking_date"
                   value={bookingData.booking_date}
                   onChange={handleChange}
-                  min="2025-05-20"
+                  min="2025-05-21" // Current date: May 21, 2025
                   className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452A]"
                   required
                 />
@@ -337,6 +332,8 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
                   className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452A]"
                 />
               </div>
+              <input type="hidden" name="restaurant_name" value={bookingData.restaurant_name} />
+              <input type="hidden" name="restaurant_city" value={bookingData.restaurant_city} />
               <motion.button
                 type="submit"
                 className="w-full px-6 py-2 text-white font-medium rounded-lg"

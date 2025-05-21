@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -71,52 +72,55 @@ const RestaurantSection: React.FC<RestaurantSectionProps> = () => {
     special_requests: '',
   });
   const [status, setStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
+  const formRef = useRef<HTMLFormElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setBookingData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Basic validation
     if (!bookingData.user_username || !bookingData.user_email || !bookingData.booking_date || !bookingData.start_time || !bookingData.party_size) {
       setStatus({ type: 'error', message: 'All fields are required.' });
       return;
     }
 
-    try {
-      const response = await fetch('http://localhost:9001/api/bookings/create/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(bookingData),
-      });
+    setStatus({ type: null, message: 'Sending reservation...' });
 
-      const result = await response.json();
-
-      if (response.ok) {
-        setStatus({ type: 'success', message: 'Reservation submitted successfully!' });
-        setBookingData({
-          ...bookingData,
-          user_username: '',
-          user_email: '',
-          booking_date: '',
-          start_time: '',
-          party_size: '',
-          special_requests: '',
-        }); // Reset form
-        setTimeout(() => {
-          setIsModalOpen(false);
-          setStatus({ type: null, message: '' });
-        }, 2000);
-      } else {
-        setStatus({ type: 'error', message: result.message || 'Failed to submit reservation.' });
-      }
-    } catch (error) {
-      setStatus({ type: 'error', message: 'An error occurred. Please try again later.' });
+    if (formRef.current) {
+      emailjs
+        .sendForm(
+          'YOUR_SERVICE_ID',
+          'YOUR_TEMPLATE_ID',
+          formRef.current,
+          'YOUR_PUBLIC_KEY'
+        )
+        .then(
+          () => {
+            setStatus({ type: 'success', message: 'Reservation submitted successfully!' });
+            setBookingData({
+              user_username: '',
+              user_email: '',
+              booking_type: 'TABLE',
+              restaurant_name: 'Smart Banquet and Resort',
+              restaurant_city: 'Chitwan',
+              booking_date: '',
+              start_time: '',
+              party_size: '',
+              special_requests: '',
+            });
+            setTimeout(() => {
+              setIsModalOpen(false);
+              setStatus({ type: null, message: '' });
+            }, 2000);
+          },
+          (error) => {
+            setStatus({ type: 'error', message: 'Failed to submit reservation. Please try again.' });
+            console.error('EmailJS error:', error.text);
+          }
+        );
     }
   };
 
@@ -238,7 +242,6 @@ const RestaurantSection: React.FC<RestaurantSectionProps> = () => {
           </motion.button>
         </motion.div>
 
-        {/* Booking Modal */}
         {isModalOpen && (
           <motion.div
             className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
@@ -275,7 +278,7 @@ const RestaurantSection: React.FC<RestaurantSectionProps> = () => {
                 </motion.div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label htmlFor="user_username" className="block text-gray-700 font-medium mb-1">
                     Name
@@ -314,7 +317,7 @@ const RestaurantSection: React.FC<RestaurantSectionProps> = () => {
                     name="booking_date"
                     value={bookingData.booking_date}
                     onChange={handleChange}
-                    min={new Date().toISOString().split('T')[0]} // Prevent past dates (May 20, 2025)
+                    min="2025-05-21" // Prevent past dates (current date: May 21, 2025)
                     className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452a]"
                     required
                   />
@@ -366,6 +369,9 @@ const RestaurantSection: React.FC<RestaurantSectionProps> = () => {
                     className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452a]"
                   />
                 </div>
+                <input type="hidden" name="booking_type" value={bookingData.booking_type} />
+                <input type="hidden" name="restaurant_name" value={bookingData.restaurant_name} />
+                <input type="hidden" name="restaurant_city" value={bookingData.restaurant_city} />
                 <motion.button
                   type="submit"
                   className="w-full px-6 py-2 text-white font-medium rounded-lg"

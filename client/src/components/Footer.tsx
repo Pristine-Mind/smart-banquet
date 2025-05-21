@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { HomeIcon, EnvelopeOpenIcon, EnvelopeClosedIcon, InstagramLogoIcon, TwitterLogoIcon } from '@radix-ui/react-icons';
+import { HomeIcon, EnvelopeOpenIcon } from '@radix-ui/react-icons';
+import { FaFacebook } from 'react-icons/fa';
+import { FaInstagram } from 'react-icons/fa';
+import { FaTiktok } from 'react-icons/fa';
+import { FaPhone } from 'react-icons/fa';
+
 
 const footerVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -42,16 +47,6 @@ const Footer: React.FC<FooterProps> = () => {
             <p className="text-black">Celebrate & Dine in Style</p>
             <div className="flex space-x-4 mt-4">
               <motion.a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                variants={iconVariants}
-                initial="rest"
-                whileHover="hover"
-              >
-                <InstagramLogoIcon className="w-6 h-6 text-black" />
-              </motion.a>
-              <motion.a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -59,17 +54,27 @@ const Footer: React.FC<FooterProps> = () => {
                 initial="rest"
                 whileHover="hover"
               >
-                <InstagramLogoIcon className="w-6 h-6 text-black" />
+                <FaInstagram className="w-6 h-6 textblack" />
               </motion.a>
               <motion.a
-                href="https://twitter.com"
+                href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 variants={iconVariants}
                 initial="rest"
                 whileHover="hover"
               >
-                <TwitterLogoIcon className="w-6 h-6 text-black" />
+                <FaFacebook className="w-6 h-6 text-black" />
+              </motion.a>
+              <motion.a
+                href="https://tiktok.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                variants={iconVariants}
+                initial="rest"
+                whileHover="hover"
+              >
+                <FaTiktok className="w-6 h-6 text-black" />
               </motion.a>
             </div>
           </div>
@@ -82,11 +87,11 @@ const Footer: React.FC<FooterProps> = () => {
                 <span className='font-semibold'>Bharatpur-12, Basanta-Chowk, Chitwan, Nepal</span>
               </li>
               <li className="flex items-center space-x-2">
-                <EnvelopeOpenIcon className="w-5 h-5 text-[#D4AF37]" />
+                <FaPhone className="w-5 h-5 text-[#D4AF37]" />
                 <span className='font-semibold'>+977 9855010590</span>
               </li>
               <li className="flex items-center space-x-2">
-                <EnvelopeClosedIcon className="w-5 h-5 text-[#D4AF37]" />
+                <EnvelopeOpenIcon className="w-5 h-5 text-[#D4AF37]" />
                 <span className='font-semibold'>info@smartbanquet.com</span>
               </li>
             </ul>

@@ -216,7 +216,7 @@ const ContactUsSection: React.FC<ContactUsSectionProps> = () => {
           <h3 className="text-2xl font-semibold text-center text-gray-800 mb-4">Our Location</h3>
           <div className="w-full h-64 rounded-lg overflow-hidden shadow-md">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3556.979843295792!2d84.4213492151221!3d27.668363482767258!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3994e58b8e5b2f4d%3A0x7e5a8c2b1f3b9c!2sBharatpur%2C%20Chitwan%2C%20Nepal!5e0!3m2!1sen!2sus!4v1716164100000!5m2!1sen!2sus"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3533.6764009906587!2d84.4507046!3d27.6654819!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3994e5b3543478ed%3A0x1bd64023dbe662bf!2sSmart%20Banquet%20%26%20Resort!5e0!3m2!1sen!2snp!4v1747786678879!5m2!1sen!2snp"
               width="100%"
               height="100%"
               style={{ border: 0 }}

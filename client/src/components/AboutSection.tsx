@@ -82,7 +82,7 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
           <motion.div variants={textVariants}>
             <div className="rounded-lg overflow-hidden shadow-md">
               <img
-                src="https://scontent.fktm8-1.fna.fbcdn.net/v/t39.30808-6/493274449_1241984784598669_7906087421451050034_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=FxViLkbNptUQ7kNvwF5igrt&_nc_oc=Adl2066lsYMlWdWYme-0mKyEGVjtaO5oIxIJ999yjiSognHEDc3jh7i0Z5fpFH4DeNID4wj1mbfWngvz1jxNoX9c&_nc_zt=23&_nc_ht=scontent.fktm8-1.fna&_nc_gid=0Lw1TzK7wFc1U7C7n04AGQ&oh=00_AfITH4nQRtRIM8HTGg4Nm9mzpCxXNQE6HH0fxXeKAW629Q&oe=68311206"
+                src="https://scontent.fktm8-1.fna.fbcdn.net/v/t39.30808-6/485017146_1206439344819880_8361123303254403426_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=sP24z4Bz1hIQ7kNvwEFyMyq&_nc_oc=Adng6MdssM9HWkWiqABWDRhhVWITEMCWXj8kSDNlSY_lYJFfBRsf16ffVZPXse9XC0foGvepJhxz4LnVkqLiNV9h&_nc_zt=23&_nc_ht=scontent.fktm8-1.fna&_nc_gid=Tc3iADhtOvClmQn7qnrD4Q&oh=00_AfLwJWeGPh7Epm3IVdMY71pTlpKY8qMnX0KHgTErmw4ltw&oe=6841B325"
                 alt="Smart Banquet and Resort Event"
                 className="w-full h-64 object-cover"
               />

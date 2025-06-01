@@ -25,9 +25,6 @@ env = environ.Env(
     DB_PASSWORD=str,
     DB_HOST=str,
     DB_PORT=int,
-    CELERY_REDIS_URL=str,
-    DJANGO_CACHE_REDIS_URL=str,
-    TEST_DJANGO_CACHE_REDIS_URL=(str, None),
     DJANGO_STATIC_URL=(str, "/static/"),
     DJANGO_MEDIA_URL=(str, "/media/"),
     DJANGO_STATIC_ROOT=(str, os.path.join(BASE_DIR, "static")),
@@ -53,26 +50,17 @@ INSTALLED_APPS = [
     # External apps
     "reversion",
     "admin_auto_filters",
-    "django_premailer",
     "storages",
     "corsheaders",
     "rest_framework",
     "rest_framework.authtoken",
     "django_filters",
-    "django_celery_beat",
-    "tinymce",
-    "anymail",
-    "channels",
-    "django_prometheus",
-    "drf_spectacular",
-    "guardian",
     # Local Apps
     "event",
     "restaurant",
 ]
 
 MIDDLEWARE = [
-    "django_prometheus.middleware.PrometheusBeforeMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
@@ -81,7 +69,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "django_prometheus.middleware.PrometheusAfterMiddleware",
 ]
 
 ROOT_URLCONF = "main.urls"
@@ -191,50 +178,10 @@ REST_FRAMEWORK = {
         "rest_framework.filters.SearchFilter",
         "rest_framework.filters.OrderingFilter",
     ),
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
-
-TINYMCE_DEFAULT_CONFIG = {
-    "entity_encoding": "raw",
-    "height": 360,
-    "width": 1120,
-    "cleanup_on_startup": True,
-    "custom_undo_redo_levels": 20,
-    "plugins": """
-        anchor autolink charmap code codesample directionality
-        fullscreen image insertdatetime link lists media
-        nonbreaking pagebreak preview save searchreplace table
-        visualblocks visualchars
-        """,
-    "toolbar1": """
-        bold italic underline superscript subscript fontsizeselect
-        | alignleft alignright | aligncenter alignjustify
-        | indent outdent | bullist numlist |
-        | link visualchars charmap image hr nonbreaking | code preview fullscreen
-        """,
-    "paste_data_images": False,
-    "force_p_newlines": True,
-    "force_br_newlines": True,
-    "forced_root_block": "",
-    "contextmenu": "formats | link",
-    "menubar": False,
-    "statusbar": False,
-    "invalid_styles": {"*": "opacity"},
-}
 
 ASGI_APPLICATION = "main.asgi.application"
-
-
-CELERY_REDIS_URL = env("CELERY_REDIS_URL")
-CELERY_BROKER_URL = CELERY_REDIS_URL
-CELERY_RESULT_BACKEND = CELERY_REDIS_URL
-CELERY_TIMEZONE = TIME_ZONE
-CELERY_ACKS_LATE = True
-CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
-CELERY_ACCEPT_CONTENT = ["json"]
-CELERY_TASK_SERIALIZER = "json"
-CELERY_RESULT_SERIALIZER = "json"
 
 LOGGING = {
     "version": 1,
@@ -260,13 +207,6 @@ LOGGING = {
             "propagate": True,
         },
     },
-}
-
-SPECTACULAR_SETTINGS = {
-    "TITLE": "Smart Banquet API",
-    "DESCRIPTION": "Smart Banquet API Documenation",
-    "VERSION": "1.0.0",
-    "SERVE_INCLUDE_SCHEMA": False,
 }
 
 CSRF_COOKIE_SECURE = False

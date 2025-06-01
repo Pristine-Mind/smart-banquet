@@ -138,7 +138,7 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
     <motion.section
       className="relative h-[80vh] bg-cover bg-center flex items-center justify-center text-center"
       style={{
-        backgroundImage: `url('https://scontent.fktm8-1.fna.fbcdn.net/v/t39.30808-6/493274449_1241984784598669_7906087421451050034_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=FxViLkbNptUQ7kNvwF5igrt&_nc_oc=Adl2066lsYMlWdWYme-0mKyEGVjtaO5oIxIJ999yjiSognHEDc3jh7i0Z5fpFH4DeNID4wj1mbfWngvz1jxNoX9c&_nc_zt=23&_nc_ht=scontent.fktm8-1.fna&_nc_gid=0Lw1TzK7wFc1U7C7n04AGQ&oh=00_AfITH4nQRtRIM8HTGg4Nm9mzpCxXNQE6HH0fxXeKAW629Q&oe=68311206')`,
+        backgroundImage: `url('https://scontent.fktm8-1.fna.fbcdn.net/v/t39.30808-6/489424754_1225216699608811_8514505831936378815_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=RkSHLdrveRsQ7kNvwFmixq7&_nc_oc=AdkV8rZencP35ifqu8jqOwflYDbfsPIlR8x5FcSth-afyBTmnp1UsZvUJf_wDkioXNCzX_lVI2ObB-wqAGfQu7nO&_nc_zt=23&_nc_ht=scontent.fktm8-1.fna&_nc_gid=15xOGBujKt2TlvLS4OzObw&oh=00_AfLxeZ4mtcusW3UnIAHNc8xQ7gJvurPFGxgp2FFZQT-fOQ&oe=6841AE9D')`,
       }}
       variants={sectionVariants}
       initial="hidden"

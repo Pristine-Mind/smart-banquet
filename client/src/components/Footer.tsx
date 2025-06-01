@@ -6,6 +6,7 @@ import { FaFacebook } from 'react-icons/fa';
 import { FaInstagram } from 'react-icons/fa';
 import { FaTiktok } from 'react-icons/fa';
 import { FaPhone } from 'react-icons/fa';
+import logo from "../assets/logo.png";
 
 
 const footerVariants = {
@@ -40,10 +41,14 @@ const Footer: React.FC<FooterProps> = () => {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <HomeIcon className="w-8 h-8 text-[#D4AF37]" />
-              <h3 className="text-2xl font-bold">Smart Banquet and Resort</h3>
-            </div>
+          <div className="flex items-center space-x-2 mb-4">
+            <img
+              src={logo}
+              alt="Smart Banquet and Resort Logo"
+              className="h-20 w-auto object-contain"
+            />
+          </div>
+
             <p className="text-black">Celebrate & Dine in Style</p>
             <div className="flex space-x-4 mt-4">
               <motion.a

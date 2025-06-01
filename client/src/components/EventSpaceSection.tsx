@@ -4,17 +4,17 @@ import { motion } from 'framer-motion';
 const spaces = [
   {
     name: 'Grand Banquet Hall',
-    image: 'https://images.unsplash.com/photo-1677129663241-5be1f17fe6fe?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YmFucXVldCUyMGhhbGx8ZW58MHx8MHx8fDA%3D',
+    image: 'https://scontent.fktm8-1.fna.fbcdn.net/v/t1.6435-9/135367263_146099753980592_8792492053444381948_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=_3jghIaxq0UQ7kNvwF5apYX&_nc_oc=AdnujJRzWxci4l9zk-ZDfW-DwTuGHKVvOqJfCrMnUA9KlcgKxzZUBbGh5S0fnV1QqwY8OpGDWgNjjLTAJ9PsOgrM&_nc_zt=23&_nc_ht=scontent.fktm8-1.fna&_nc_gid=mmlMnEUZaczXWJCbZlqidg&oh=00_AfIpt5QMxN3IpmhFezjK_nuce-hxa1B8iH6410w50zNKsw&oe=6863492C',
     description: 'Our Grand Banquet Hall is perfect for weddings and large celebrations, accommodating up to 200 guests with elegant decor.',
   },
   {
     name: 'Private Dining Room',
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: 'https://scontent.fktm8-1.fna.fbcdn.net/v/t39.30808-6/485151416_1209746307822517_3282552096858187440_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_ohc=iwxLRsEuZCYQ7kNvwFnEY8D&_nc_oc=Adll0QOLLiVWS1vAH3EUp6qcRAAJEMENzaOKJ58_X5zzFZuj007VVK_mwJ6GvwO_Oh3HrpIDsT-G90FZQKd7mONh&_nc_zt=23&_nc_ht=scontent.fktm8-1.fna&_nc_gid=p1iRo6jYcy9yA_wB3ywyow&oh=00_AfJAn--xD3e5ChOTb1_R3CYwyec1yvvHSee08BwowvqBbw&oe=6841B46A',
     description: 'Enjoy an intimate dining experience in our Private Dining Room, ideal for family gatherings or corporate dinners.',
   },
   {
     name: 'Outdoor Party Terrace',
-    image: 'https://images.unsplash.com/photo-1636061140114-fb636ae54dda?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fG91dGRvb3IlMjBwYXJ0eSUyMHRlcnJhY2V8ZW58MHx8MHx8fDA%3D',
+    image: 'https://scontent.fktm8-1.fna.fbcdn.net/v/t39.30808-6/469449113_1068972905026601_6273194379615164465_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=irjkHxnX848Q7kNvwFmZBdv&_nc_oc=Adkai20kI7NYZ02zGr5mQrTqSzdA13AzC5HiI77AILuGjy-yaHaE_OF-lWN5ibfvM-7iPQFSRfIGc_TfYjU-V8rZ&_nc_zt=23&_nc_ht=scontent.fktm8-1.fna&_nc_gid=ccONkUhlTUCQ7Bjcj29Geg&oh=00_AfIz6PpxNNZlTCDc0KqbfkVPrA63x04Mt-Jv8wAG-C_rRg&oe=6841C3D1',
     description: 'Host your next event on our Outdoor Party Terrace, offering a vibrant setting for up to 100 guests with stunning views.',
   },
 ];

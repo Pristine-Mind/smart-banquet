@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { HomeIcon } from '@radix-ui/react-icons';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import logo from "../assets/logo.jpeg";
 
 const navbarVariants = {
   hidden: { opacity: 0, y: -20 },
@@ -56,8 +57,12 @@ const Navbar: React.FC<NavbarProps> = () => {
       >
         <Link to="/">
           <div className="flex items-center space-x-2">
-            <HomeIcon className="w-6 h-6 text-red-600" />
-            <span className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold text-gray-800">SMART GARDEN</span>
+            {/* <HomeIcon className="w-6 h-6 text-red-600" /> */}
+            <img
+              src={logo}
+              alt="Smart Garden"
+              className="h-20 w-auto object-contain"
+            />
           </div>
         </Link>
       </motion.div>

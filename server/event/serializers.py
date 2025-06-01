@@ -11,10 +11,3 @@ class BookingSerializer(serializers.ModelSerializer):
         fields = ["id", "event", "first_name", "last_name", "email", "phone", "booking_date", "status"]
         read_only_fields = ["id", "booking_date", "status"]
 
-    def validate(self, data):
-        event = data["event"]
-        if event.bookings.count() >= event.capacity:
-            raise serializers.ValidationError("This event is fully booked.")
-        if Booking.objects.filter(event=event, email=data["email"]).exists():
-            raise serializers.ValidationError("This email is already booked for the event.")
-        return data

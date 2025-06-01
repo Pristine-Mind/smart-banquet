@@ -130,7 +130,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = () => {
           </motion.div>
         </div>
 
-        <motion.div className="text-center mt-12" variants={textVariants}>
+        {/* <motion.div className="text-center mt-12" variants={textVariants}>
           <Link to="/booking">
             <motion.button
               className="px-6 py-3 text-white font-medium rounded-lg bg-[#62452a]"
@@ -141,7 +141,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = () => {
               Book Now
             </motion.button>
           </Link>
-        </motion.div>
+        </motion.div> */}
       </div>
     </motion.section>
   );

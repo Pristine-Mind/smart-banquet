@@ -1,6 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import restaurant from '../assets/restaurant.jpg';
+import restaurant2 from '../assets/restaurant2.jpg';
+import hall from '../assets/hall.jpg';
+import hall2 from '../assets/hall2.jpg';
+import outdoor from '../assets/outdoor.jpg';
+import indoor from '../assets/indoor.jpg';
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -62,6 +68,27 @@ const ServicesSection: React.FC<ServicesSectionProps> = () => {
         >
           Discover the full spectrum of exceptional services at Smart Banquet and Resort. From flawless event planning to luxurious accommodations and gourmet dining, we are dedicated to making every moment unforgettable.
         </motion.p>
+
+        {/* Auto-scrolling Image Section */}
+        <div className="mb-12 overflow-hidden">
+          <div className="flex animate-scroll gap-4">
+            {[restaurant, restaurant2, hall, hall2, outdoor, indoor].map((img, index) => (
+              <motion.div
+                key={index}
+                className="flex-shrink-0 w-[300px] h-[200px] rounded-lg overflow-hidden shadow-lg"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <img
+                  src={img}
+                  alt={`Service showcase ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <motion.div

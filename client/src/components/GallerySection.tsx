@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import hall from '../assets/hall.jpg';
+import hall2 from '../assets/hall2.jpg';
+import restaurant from '../assets/restaurant.jpg';
+import restaurant2 from '../assets/restaurant2.jpg';
+import indoor from '../assets/indoor.jpg';
+import outdoor from '../assets/outdoor.jpg';
+import garden from '../assets/garden.jpg';
+import outdoor2 from '../assets/outdoor2.jpg';
 
 const galleryItems = [
-  { id: 1, src: 'https://plus.unsplash.com/premium_photo-1664391631217-d53431f0effd?q=80&w=3435&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', title: 'Grand Event Hall', category: 'Events' },
-  { id: 2, src: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', title: 'Dining Elegance', category: 'Dining' },
-  { id: 3, src: 'https://images.unsplash.com/photo-1642704578943-a3aac11885a7?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGdhcmRlbiUyMHZlbnVlfGVufDB8fDB8fHww', title: 'Garden Venue', category: 'Outdoors' },
-  { id: 4, src: 'https://images.unsplash.com/photo-1648226507967-d26f3257b571?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdlZGluZ3xlbnwwfHwwfHx8MA%3D%3D', title: 'Wedding Setup', category: 'Events' },
-  { id: 5, src: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', title: 'Gourmet Dish', category: 'Dining' },
-  { id: 6, src: 'https://images.unsplash.com/photo-1600891964599-f61ba0e24092?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', title: 'Outdoor Party', category: 'Outdoors' },
+  { id: 1, src: hall, title: 'Grand Event Hall', category: 'Events' },
+  { id: 2, src: restaurant, title: 'Dining Elegance', category: 'Dining' },
+  { id: 3, src: outdoor, title: 'Garden Venue', category: 'Outdoors' },
+  { id: 4, src: hall2, title: 'Wedding Setup', category: 'Events' },
+  { id: 5, src: restaurant2, title: 'Gourmet Experience', category: 'Dining' },
+  { id: 6, src: indoor, title: 'Indoor Celebration', category: 'Events' },
+  {id: 7, src: outdoor2, title: 'Outdoor Celebration', category: 'Outdoors'},
+  {id: 8, src: garden, title: 'Garden Venue', category: 'Outdoors'},
 ];
 
 const sectionVariants = {

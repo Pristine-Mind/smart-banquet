@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-
+import hall from '../assets/hall.mp4';
 const sectionVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -129,7 +129,23 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
           </div>
         </motion.div>
       </div>
+      <section className="py-10 bg-gray-100">
+        <div className="max-w-3xl mx-auto px-4">
+          <h2 className="text-2xl font-semibold text-center mb-6">Take a Virtual Tour</h2>
+          <div className="w-full aspect-video overflow-hidden rounded-lg shadow-lg">
+            <video
+              src={hall}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </section>
     </motion.section>
+    
   );
 };
 

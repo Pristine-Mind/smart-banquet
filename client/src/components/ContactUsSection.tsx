@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import contact from '../assets/contact.jpg';
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -126,18 +127,35 @@ const ContactUsSection: React.FC<ContactUsSectionProps> = () => {
           <motion.div className="space-y-6" variants={textVariants}>
             <h3 className="text-2xl font-semibold text-gray-800">Get in Touch</h3>
             <p className="text-gray-600">
-              We’d love to hear from you! Reach out for inquiries, bookings, or assistance.
+              We'd love to hear from you! Reach out for inquiries, bookings, or assistance.
             </p>
             <div className="space-y-4">
               <p className="flex items-center text-gray-600">
-                <span className="mr-2">📞</span> +977 9855075835
+                <span className="mr-2">📞</span> +977 9855010590
               </p>
               <p className="flex items-center text-gray-600">
-                <span className="mr-2">📧</span> info@smartbanquet.com
+                <span className="mr-2">📧</span> business.smartgarden.bharatpur@gmail.com
               </p>
               <p className="flex items-center text-gray-600">
-                <span className="mr-2">📍</span> Bharatpur-9, Hakim-Chowk, Chitwan, Nepal
+                <span className="mr-2">📍</span> Bharatpur-12, BasnataChowk, Chitwan, Nepal
               </p>
+            </div>
+
+            {/* Contact Images */}
+            <div className="grid grid-cols-2 gap-4 mt-6">
+              <motion.div
+                className="relative h-[200px] rounded-lg overflow-hidden shadow-lg"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                whileHover={{ scale: 1.02 }}
+              >
+                <img
+                  src={contact}
+                  alt="Restaurant View"
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
             </div>
           </motion.div>
 

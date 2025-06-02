@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
+import restaurant from '../assets/restaurant.jpg';
+import restaurant2 from '../assets/restaurant2.jpg';
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -227,18 +229,62 @@ const RestaurantSection: React.FC<RestaurantSectionProps> = () => {
           </motion.div>
         </div>
 
-        <motion.div className="text-center mt-12" variants={textVariants}>
-          <p className="text-gray-700 mb-4">
-            Reserve your table today for a memorable dining experience. Call us at +977 9855075835 or book online.
-          </p>
-          <motion.button
-            onClick={() => setIsModalOpen(true)}
-            className="px-6 py-3 text-white font-medium rounded-lg"
-            variants={buttonVariants}
-            initial="rest"
-            whileHover="hover"
+        {/* Dining Experience Gallery */}
+        <div className="mt-16">
+          <motion.h3
+            className="text-3xl font-bold text-center text-gray-800 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
-            Reserve Now
+            Our Dining Spaces
+          </motion.h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {[
+              {
+                src: restaurant,
+                alt: "Elegant Dining Room"
+              },
+              {
+                src: restaurant2,
+                alt: "Indoor Seating"
+              },
+            ].map((image, index) => (
+              <motion.div
+                key={index}
+                className="relative h-[250px] overflow-hidden rounded-lg shadow-lg"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ scale: 1.02 }}
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                  <p className="text-white text-lg font-semibold">{image.alt}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        <motion.div
+          className="mt-12 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <motion.button
+            className="px-8 py-3 bg-[#62452a] text-white rounded-lg font-semibold hover:bg-[#B8972F] transition-colors duration-300"
+            variants={buttonVariants}
+            whileHover="hover"
+            onClick={() => setIsModalOpen(true)}
+          >
+            Book a Table
           </motion.button>
         </motion.div>
 

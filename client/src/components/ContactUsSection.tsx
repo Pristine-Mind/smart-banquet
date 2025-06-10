@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import contact from '../assets/contact.jpg';
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -93,7 +92,6 @@ const ContactUsSection: React.FC<ContactUsSectionProps> = () => {
       whileInView="visible"
       viewport={{ once: true }}
     >
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519167758481-83f550bbae11?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-10"></div>
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.h2
@@ -139,23 +137,6 @@ const ContactUsSection: React.FC<ContactUsSectionProps> = () => {
               <p className="flex items-center text-gray-600">
                 <span className="mr-2">📍</span> Bharatpur-12, BasnataChowk, Chitwan, Nepal
               </p>
-            </div>
-
-            {/* Contact Images */}
-            <div className="grid grid-cols-2 gap-4 mt-6">
-              <motion.div
-                className="relative h-[200px] rounded-lg overflow-hidden shadow-lg"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                whileHover={{ scale: 1.02 }}
-              >
-                <img
-                  src={contact}
-                  alt="Restaurant View"
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
             </div>
           </motion.div>
 

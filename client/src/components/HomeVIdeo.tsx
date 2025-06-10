@@ -1,55 +1,106 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import AutoPlayVideo from './AutoPlayVideo';
 
-interface AutoPlayVideoProps {
-  src: string;
-  poster?: string;
-  loop?: boolean;
-  muted?: boolean;
-  controls?: boolean;
+import video1 from '../assets/welcome.mp4';
+import video2 from '../assets/welcome2.mp4';
+import video3 from '../assets/welcome3.mp4';
+
+interface ThreeVideoPlayerProps {
   className?: string;
-  title?: string;
 }
 
-const AutoPlayVideo: React.FC<AutoPlayVideoProps> = ({
-  src,
-  poster,
-  loop = true,
-  muted = true,
-  controls = false,
+const ThreeVideoPlayer: React.FC<ThreeVideoPlayerProps> = ({
   className = '',
-  title = 'Welcome to Smart Banquet',
 }) => {
+  const videos = [
+    {
+      src: video1,
+      title: '',
+    },
+    {
+      src: video2,
+      title: '',
+    },
+    {
+      src: video3,
+      title: '',
+    },
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const videoVariants = {
+    hidden: { opacity: 0, scale: 0.95, y: 50 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: 'easeOut',
+      },
+    },
+  };
+
+  const headingVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: 'easeOut',
+        delay: 0.1,
+      },
+    },
+  };
+
   return (
-    <div className={`w-full h-[700px] overflow-hidden mx-auto ${className} bg-white relative mb-8`}>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="absolute top-4 left-0 right-0 z-10 text-center"
-      >
+    <motion.div
+      className={`w-full max-w-[1400px] mx-auto flex flex-col items-center gap-4 p-4 ${className}`}
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <div className="flex items-center justify-center min-h-[150px]">
         <motion.h1
-          initial={{ scale: 0.8 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-3xl font-bold text-white drop-shadow-lg"
+          className="text-4xl font-bold text-black text-center drop-shadow-lg"
+          variants={headingVariants}
         >
-          {title}
+          Smart Garden and Restaurant
         </motion.h1>
-      </motion.div>
-        
-      <video
-        className="w-full h-full object-cover"
-        src={src}
-        poster={poster}
-        autoPlay
-        muted={muted}
-        loop={loop}
-        playsInline
-        controls={controls}
-      />
-    </div>
+      </div>
+      <div className="flex flex-col lg:flex-row w-full gap-4">
+        {videos.slice(0, 3).map((video, index) => (
+          <motion.div
+            key={index}
+            className="w-full lg:w-1/3"
+            variants={videoVariants}
+            custom={index}
+          >
+            <AutoPlayVideo
+              src={video.src}
+              title={video.title}
+              loop={true}
+              muted={true}
+              controls={false}
+              className="h-[400px] lg:h-[500px] rounded-lg shadow-lg"
+            />
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
   );
 };
 
-export default AutoPlayVideo;
+export default ThreeVideoPlayer;

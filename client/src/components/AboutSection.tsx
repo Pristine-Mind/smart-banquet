@@ -1,7 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import indoor from '../assets/indoor.jpg'
+import party1 from '../assets/party1.mp4'
 import hall from '../assets/hall.mp4';
+
 const sectionVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -41,8 +44,12 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
       viewport={{ once: true }}
     >
       {/* Background Overlay */}
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519167758481-83f550bbae11?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-10"></div>
-
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-10"
+        // style={{
+        //   backgroundImage: `url(${indoor})`,
+        // }}
+      ></div>
       <div className="container mx-auto px-4 relative z-10">
         {/* About Us Heading */}
         <motion.h2
@@ -82,7 +89,7 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
           <motion.div variants={textVariants}>
             <div className="rounded-lg overflow-hidden shadow-md">
               <img
-                src="https://scontent.fktm8-1.fna.fbcdn.net/v/t39.30808-6/485017146_1206439344819880_8361123303254403426_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=sP24z4Bz1hIQ7kNvwEFyMyq&_nc_oc=Adng6MdssM9HWkWiqABWDRhhVWITEMCWXj8kSDNlSY_lYJFfBRsf16ffVZPXse9XC0foGvepJhxz4LnVkqLiNV9h&_nc_zt=23&_nc_ht=scontent.fktm8-1.fna&_nc_gid=Tc3iADhtOvClmQn7qnrD4Q&oh=00_AfLwJWeGPh7Epm3IVdMY71pTlpKY8qMnX0KHgTErmw4ltw&oe=6841B325"
+                src={indoor}
                 alt="Smart Banquet and Resort Event"
                 className="w-full h-64 object-cover"
               />
@@ -129,18 +136,36 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
           </div>
         </motion.div>
       </div>
-      <section className="py-10 bg-gray-100">
-        <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl font-semibold text-center mb-6">Take a Virtual Tour</h2>
-          <div className="w-full aspect-video overflow-hidden rounded-lg shadow-lg">
-            <video
-              src={hall}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="w-full h-full object-cover"
-            />
+      <section className="py-12 bg-gray-100">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
+            Take a Virtual Tour
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Video 1 */}
+            <div className="w-full aspect-video overflow-hidden rounded-xl shadow-xl transition-transform duration-300 hover:scale-[1.02]">
+              <video
+                src={hall}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+                aria-label="Virtual tour of banquet hall"
+              />
+            </div>
+            {/* Video 2 */}
+            <div className="w-full aspect-video overflow-hidden rounded-xl shadow-xl transition-transform duration-300 hover:scale-[1.02]">
+              <video
+                src={party1}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+                aria-label="Virtual tour of resort event space"
+              />
+            </div>
           </div>
         </div>
       </section>

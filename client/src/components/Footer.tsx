@@ -93,11 +93,11 @@ const Footer: React.FC<FooterProps> = () => {
               </li>
               <li className="flex items-center space-x-2">
                 <FaPhone className="w-5 h-5 text-[#D4AF37]" />
-                <span className='font-semibold'>+977 9855010590</span>
+                <span className='font-semibold'>+977 9855010590 / 9845543891</span>
               </li>
               <li className="flex items-center space-x-2">
                 <EnvelopeOpenIcon className="w-5 h-5 text-[#D4AF37]" />
-                <span className='font-semibold'>info@smartbanquet.com</span>
+                <span className='font-semibold'>business.smartgarden.bharatpur@gmail.com</span>
               </li>
             </ul>
           </div>
@@ -122,7 +122,7 @@ const Footer: React.FC<FooterProps> = () => {
         </div>
 
         <div className="border-t border-gray-600 mt-8 pt-4 text-center text-black">
-          <p>© 2025 Smart Banquet and Resort. All rights reserved.</p>
+          <p>© 2025 Smart Garden and Restaurant. All rights reserved.</p>
         </div>
       </div>
     </motion.footer>

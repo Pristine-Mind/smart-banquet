@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
-import indoor3 from '../assets/indoor3.jpeg'
+import indoor3 from '../assets/indoor3.jpeg';
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -81,23 +81,23 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     const requiredFields = ['user_username', 'user_email', 'booking_date', 'start_time', 'party_size'];
     const hasMissingFields = requiredFields.some((field) => {
       const value = bookingData[field as keyof BookingData];
       return value === undefined || value === null || value === '';
     });
-  
+
     if (hasMissingFields) {
       setStatus({ type: 'error', message: 'All required fields must be filled.' });
       return;
     }
-  
+
     if (bookingData.booking_type === 'EVENT' && !bookingData.event_title) {
       setStatus({ type: 'error', message: 'Event title is required for event bookings.' });
       return;
     }
-  
+
     const sanitizedData: BookingData = {
       user_username: bookingData.user_username || '',
       user_email: bookingData.user_email || '',
@@ -110,9 +110,8 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
       special_requests: bookingData.special_requests || '',
       event_title: bookingData.event_title || '',
     };
-  
     setStatus({ type: null, message: 'Submitting booking...' });
-  
+
     if (formRef.current) {
       emailjs
         .sendForm(
@@ -128,7 +127,7 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
               user_username: '',
               user_email: '',
               booking_type: '',
-              restaurant_name: 'Smart Banquet and Resort',
+              restaurant_name: 'Smart Restaurant',
               restaurant_city: 'Chitwan',
               booking_date: '',
               start_time: '',
@@ -176,12 +175,12 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
             className="text-lg text-white max-w-2xl mx-auto mb-6"
             variants={textVariants}
           >
-            Experience luxury and comfort at Smart Garden and Restauarnt, nestled in the heart of Chitwan, Nepal. 
+            Experience luxury and comfort at Smart Garden and Restaurant, nestled in the heart of Chitwan, Nepal. 
             Enjoy world-class amenities, exquisite dining, and a serene environment perfect for your next getaway.
           </motion.p>
           <motion.button
             onClick={() => setIsModalOpen(true)}
-            className="px-6 py-3 text-black font-semibold rounded-lg"
+            className="px-6 py-3 text-black font-semibold rounded-lg bg-[#D4AF37]"
             variants={buttonVariants}
             initial="rest"
             whileHover="hover"
@@ -192,13 +191,13 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
 
         {isModalOpen && (
           <motion.div
-            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="bg-white rounded-lg p-6 w-full max-w-md relative"
+              className="bg-white rounded-lg p-8 w-full max-w-3xl max-h-[80vh] overflow-y-auto relative"
               variants={modalVariants}
               initial="hidden"
               animate="visible"
@@ -206,11 +205,11 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
             >
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="absolute top-2 right-2 text-gray-600 hover:text-gray-800"
+                className="absolute top-4 right-4 text-gray-600 hover:text-gray-800 text-xl"
               >
                 ✕
               </button>
-              <h3 className="text-2xl font-semibold text-gray-800 mb-4">Make a Booking</h3>
+              <h3 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Make a Booking</h3>
 
               {status.type && (
                 <motion.div
@@ -226,34 +225,36 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
                 </motion.div>
               )}
 
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label htmlFor="user_username" className="block text-gray-700 font-medium mb-1">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="user_username"
-                    name="user_username"
-                    value={bookingData.user_username}
-                    onChange={handleChange}
-                    className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452A]"
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="user_email" className="block text-gray-700 font-medium mb-1">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="user_email"
-                    name="user_email"
-                    value={bookingData.user_email}
-                    onChange={handleChange}
-                    className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452A]"
-                    required
-                  />
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="user_username" className="block text-gray-700 font-medium mb-1">
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      id="user_username"
+                      name="user_username"
+                      value={bookingData.user_username}
+                      onChange={handleChange}
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452A]"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="user_email" className="block text-gray-700 font-medium mb-1">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      id="user_email"
+                      name="user_email"
+                      value={bookingData.user_email}
+                      onChange={handleChange}
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452A]"
+                      required
+                    />
+                  </div>
                 </div>
                 <div>
                   <label htmlFor="booking_type" className="block text-gray-700 font-medium mb-1">
@@ -264,41 +265,43 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
                     name="booking_type"
                     value={bookingData.booking_type}
                     onChange={handleChange}
-                    className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452A]"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62456A]"
                     required
                   >
                     <option value="TABLE">Table Reservation</option>
                     <option value="EVENT">Event Booking</option>
                   </select>
                 </div>
-                <div>
-                  <label htmlFor="booking_date" className="block text-gray-700 font-medium mb-1">
-                    Date
-                  </label>
-                  <input
-                    type="date"
-                    id="booking_date"
-                    name="booking_date"
-                    value={bookingData.booking_date}
-                    onChange={handleChange}
-                    min="2025-05-21"
-                    className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452A]"
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="start_time" className="block text-gray-700 font-medium mb-1">
-                    Start Time
-                  </label>
-                  <input
-                    type="time"
-                    id="start_time"
-                    name="start_time"
-                    value={bookingData.start_time}
-                    onChange={handleChange}
-                    className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452A]"
-                    required
-                  />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="booking_date" className="block text-gray-700 font-medium mb-1">
+                      Date
+                    </label>
+                    <input
+                      type="date"
+                      id="booking_date"
+                      name="booking_date"
+                      value={bookingData.booking_date}
+                      onChange={handleChange}
+                      min="2025-05-21"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452A]"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="start_time" className="block text-gray-700 font-medium mb-1">
+                      Start Time
+                    </label>
+                    <input
+                      type="time"
+                      id="start_time"
+                      name="start_time"
+                      value={bookingData.start_time}
+                      onChange={handleChange}
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452A]"
+                      required
+                    />
+                  </div>
                 </div>
                 <div>
                   <label htmlFor="party_size" className="block text-gray-700 font-medium mb-1">
@@ -309,7 +312,7 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
                     name="party_size"
                     value={bookingData.party_size}
                     onChange={handleChange}
-                    className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452A]"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452A]"
                     required
                   >
                     <option value="">Select number of guests</option>
@@ -331,7 +334,7 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
                       name="event_title"
                       value={bookingData.event_title}
                       onChange={handleChange}
-                      className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452A]"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452A]"
                       required
                     />
                   </div>
@@ -345,15 +348,15 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
                     name="special_requests"
                     value={bookingData.special_requests}
                     onChange={handleChange}
-                    rows={3}
-                    className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452A]"
+                    rows={4}
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452A]"
                   />
                 </div>
                 <input type="hidden" name="restaurant_name" value={bookingData.restaurant_name} />
                 <input type="hidden" name="restaurant_city" value={bookingData.restaurant_city} />
                 <motion.button
                   type="submit"
-                  className="w-full px-6 py-2 text-white font-medium rounded-lg"
+                  className="w-full px-6 py-3 text-white font-medium rounded-lg bg-[#62452A]"
                   variants={buttonVariants}
                   initial="rest"
                   whileHover="hover"

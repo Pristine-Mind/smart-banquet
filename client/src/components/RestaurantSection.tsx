@@ -94,10 +94,10 @@ const RestaurantSection: React.FC<RestaurantSectionProps> = () => {
     if (formRef.current) {
       emailjs
         .sendForm(
-          'YOUR_SERVICE_ID',
-          'YOUR_TEMPLATE_ID',
+          'smart_garden_restaurant',
+          'template_mxgpb7k',
           formRef.current,
-          'YOUR_PUBLIC_KEY'
+          '42gma15X3fCcZ1vY-'
         )
         .then(
           () => {
@@ -106,7 +106,7 @@ const RestaurantSection: React.FC<RestaurantSectionProps> = () => {
               user_username: '',
               user_email: '',
               booking_type: 'TABLE',
-              restaurant_name: 'Smart Banquet and Resort',
+              restaurant_name: 'Smart Restaurant',
               restaurant_city: 'Chitwan',
               booking_date: '',
               start_time: '',

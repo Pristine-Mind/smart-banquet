@@ -52,7 +52,7 @@ const Footer: React.FC<FooterProps> = () => {
             <p className="text-black">Celebrate & Dine in Style</p>
             <div className="flex space-x-4 mt-4">
               <motion.a
-                href="https://instagram.com"
+                href="https://www.instagram.com/smart_garden_restaurant/"
                 target="_blank"
                 rel="noopener noreferrer"
                 variants={iconVariants}
@@ -62,7 +62,7 @@ const Footer: React.FC<FooterProps> = () => {
                 <FaInstagram className="w-6 h-6 textblack" />
               </motion.a>
               <motion.a
-                href="https://facebook.com"
+                href="hhttps://www.facebook.com/smartbanquetandresort"
                 target="_blank"
                 rel="noopener noreferrer"
                 variants={iconVariants}
@@ -72,7 +72,7 @@ const Footer: React.FC<FooterProps> = () => {
                 <FaFacebook className="w-6 h-6 text-black" />
               </motion.a>
               <motion.a
-                href="https://tiktok.com"
+                href="https://www.tiktok.com/@smart_garden_restaurant"
                 target="_blank"
                 rel="noopener noreferrer"
                 variants={iconVariants}
@@ -93,7 +93,7 @@ const Footer: React.FC<FooterProps> = () => {
               </li>
               <li className="flex items-center space-x-2">
                 <FaPhone className="w-5 h-5 text-[#D4AF37]" />
-                <span className='font-semibold'>+977 9855010590 / 9845543891</span>
+                <span className='font-semibold'>+977 9855010590 / 056-420264</span>
               </li>
               <li className="flex items-center space-x-2">
                 <EnvelopeOpenIcon className="w-5 h-5 text-[#D4AF37]" />

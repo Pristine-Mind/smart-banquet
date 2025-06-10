@@ -2,8 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import indoor from '../assets/indoor.jpg'
-import party1 from '../assets/party1.mp4'
-import hall from '../assets/hall.mp4';
+import indoorv from '../assets/indoor.mp4'
+import indoorv1 from '../assets/indoor1.mp4'
+import indoorv2 from '../assets/indoor2.mp4'
+import outdoor from '../assets/outdoor.mp4'
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -145,7 +147,7 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
             {/* Video 1 */}
             <div className="w-full aspect-video overflow-hidden rounded-xl shadow-xl transition-transform duration-300 hover:scale-[1.02]">
               <video
-                src={hall}
+                src={indoorv}
                 autoPlay
                 muted
                 loop
@@ -157,7 +159,29 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
             {/* Video 2 */}
             <div className="w-full aspect-video overflow-hidden rounded-xl shadow-xl transition-transform duration-300 hover:scale-[1.02]">
               <video
-                src={party1}
+                src={indoorv1}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+                aria-label="Virtual tour of resort event space"
+              />
+            </div>
+            <div className="w-full aspect-video overflow-hidden rounded-xl shadow-xl transition-transform duration-300 hover:scale-[1.02]">
+              <video
+                src={indoorv2}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+                aria-label="Virtual tour of resort event space"
+              />
+            </div>
+            <div className="w-full aspect-video overflow-hidden rounded-xl shadow-xl transition-transform duration-300 hover:scale-[1.02]">
+              <video
+                src={outdoor}
                 autoPlay
                 muted
                 loop

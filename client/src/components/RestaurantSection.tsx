@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import restaurant from '../assets/restaurant.jpg';
 import restaurant2 from '../assets/restaurant2.jpg';
-
+import restaurnt3 from '../assets/restaurant3.jpeg'
 const sectionVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -250,6 +250,10 @@ const RestaurantSection: React.FC<RestaurantSectionProps> = () => {
                 src: restaurant2,
                 alt: "Indoor Seating"
               },
+              {
+                src: restaurnt3,
+                alt: "Dining"
+              }
             ].map((image, index) => (
               <motion.div
                 key={index}

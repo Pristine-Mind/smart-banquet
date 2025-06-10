@@ -8,6 +8,14 @@ import indoor from '../assets/indoor.jpg';
 import outdoor from '../assets/outdoor.jpg';
 import garden from '../assets/garden.jpg';
 import outdoor2 from '../assets/outdoor2.jpg';
+import outdoor3 from '../assets/outdoor3.jpeg';
+import outdoor4 from '../assets/outdoor4.jpeg'
+import outdoor5 from '../assets/outdoor5.jpeg'
+import outdoor6 from '../assets/outdoor6.jpeg'
+import outdoor7 from '../assets/outdoor7.jpeg'
+import outdoor8 from '../assets/outdoor8.jpeg'
+import outdoor9 from '../assets/outdoor9.jpeg'
+import outdoor10 from '../assets/outdoor10.jpeg'
 
 const galleryItems = [
   { id: 1, src: hall, title: 'Grand Event Hall', category: 'Events' },
@@ -18,6 +26,14 @@ const galleryItems = [
   { id: 6, src: indoor, title: 'Indoor Celebration', category: 'Events' },
   {id: 7, src: outdoor2, title: 'Outdoor Celebration', category: 'Outdoors'},
   {id: 8, src: garden, title: 'Garden Venue', category: 'Outdoors'},
+  {id: 9, src: outdoor3, title: 'Garden Venue', category: 'Outdoors'},
+  {id: 10, src: outdoor4, title: 'Garden Venue', category: 'Outdoors'},
+  {id: 11, src: outdoor5, title: 'Garden Venue', category: 'Outdoors'},
+  {id: 12, src: outdoor6, title: 'Garden Venue', category: 'Outdoors'},
+  {id: 13, src: outdoor7, title: 'Garden Venue', category: 'Outdoors'},
+  {id: 14, src: outdoor8, title: 'Garden Venue', category: 'Outdoors'},
+  {id: 14, src: outdoor9, title: 'Garden Venue', category: 'Outdoors'},
+  {id: 15, src: outdoor10, title: 'Garden Venue', category: 'Outdoors'},
 ];
 
 const sectionVariants = {

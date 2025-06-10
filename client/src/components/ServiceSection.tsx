@@ -1,12 +1,16 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import restaurant from '../assets/restaurant.jpg';
-import restaurant2 from '../assets/restaurant2.jpg';
-import hall from '../assets/hall.jpg';
-import hall2 from '../assets/hall2.jpg';
+
+import hall from '../assets/food.mp4';
+import hall2 from '../assets/party2.mp4';
+import outdoor3 from '../assets/outdoor3.mp4'
 import outdoor from '../assets/outdoor.jpg';
 import indoor from '../assets/indoor.jpg';
+import restaurant3 from '../assets/restaurant3.jpeg'; // Fixed typo
+import restaurant4 from '../assets/restaurant4.jpeg'; // Fixed typo
+import outdoor4 from '../assets/outdoor4.jpeg';
+import outdoor5 from '../assets/outdoor5.jpeg';
+import outdoor6 from '../assets/outdoor6.jpeg';
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -35,9 +39,7 @@ const buttonVariants = {
   hover: { scale: 1.05, backgroundColor: '#B8972F', transition: { duration: 0.3 } },
 };
 
-interface ServicesSectionProps {}
-
-const ServicesSection: React.FC<ServicesSectionProps> = () => {
+const ServicesSection = () => {
   return (
     <motion.section
       className="relative py-12 bg-gradient-to-b from-gray-100 to-white overflow-hidden"
@@ -70,14 +72,23 @@ const ServicesSection: React.FC<ServicesSectionProps> = () => {
         </motion.p>
 
         {/* Auto-scrolling Image Section */}
-        <div className="mb-12 overflow-hidden">
+        <div className="mb-12 overflow-hidden w-full">
           <div className="flex animate-scroll gap-4">
-            {[restaurant, restaurant2, hall, hall2, outdoor, indoor].map((img, index) => (
+            {[
+              outdoor,
+              indoor,
+              restaurant3,
+              restaurant4,
+              outdoor4,
+              outdoor5,
+              outdoor6,
+            ].map((img, index) => (
               <motion.div
                 key={index}
                 className="flex-shrink-0 w-[300px] h-[200px] rounded-lg overflow-hidden shadow-lg"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <img
@@ -90,6 +101,69 @@ const ServicesSection: React.FC<ServicesSectionProps> = () => {
           </div>
         </div>
 
+        {/* Video Section */}
+        <motion.div
+          className="mb-12"
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <motion.h3
+            className="text-2xl font-semibold text-center text-gray-800 mb-6"
+            variants={textVariants}
+          >
+          </motion.h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <motion.div
+              className="w-full aspect-video overflow-hidden rounded-xl shadow-xl"
+              variants={cardVariants}
+              whileHover="hover"
+            >
+              <video
+                src={hall}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+                aria-label="Virtual tour of banquet hall"
+              />
+            </motion.div>
+            <motion.div
+              className="w-full aspect-video overflow-hidden rounded-xl shadow-xl"
+              variants={cardVariants}
+              whileHover="hover"
+            >
+              <video
+                src={hall2}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+                aria-label="Virtual tour of resort event space"
+              />
+            </motion.div>
+            <motion.div
+              className="w-full aspect-video overflow-hidden rounded-xl shadow-xl"
+              variants={cardVariants}
+              whileHover="hover"
+            >
+              <video
+                src={outdoor3}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+                aria-label="Virtual tour of resort event space"
+              />
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Service Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <motion.div
             className="p-6 bg-white rounded-lg shadow-md border border-gray-200"
@@ -157,6 +231,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = () => {
           </motion.div>
         </div>
 
+        {/* Uncommented Book Now Button */}
         {/* <motion.div className="text-center mt-12" variants={textVariants}>
           <Link to="/booking">
             <motion.button

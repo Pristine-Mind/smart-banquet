@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
-
+import indoor3 from '../assets/indoor3.jpeg'
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -62,7 +62,7 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
   const [bookingData, setBookingData] = useState<BookingData>({
     user_username: '',
     user_email: '',
-    booking_type: 'TABLE',
+    booking_type: '',
     restaurant_name: 'Smart Banquet and Resort',
     restaurant_city: 'Chitwan',
     booking_date: '',
@@ -81,28 +81,45 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     const requiredFields = ['user_username', 'user_email', 'booking_date', 'start_time', 'party_size'];
-    const hasMissingFields = requiredFields.some((field) => !bookingData[field as keyof BookingData]);
+    const hasMissingFields = requiredFields.some((field) => {
+      const value = bookingData[field as keyof BookingData];
+      return value === undefined || value === null || value === '';
+    });
+  
     if (hasMissingFields) {
       setStatus({ type: 'error', message: 'All required fields must be filled.' });
       return;
     }
-
+  
     if (bookingData.booking_type === 'EVENT' && !bookingData.event_title) {
       setStatus({ type: 'error', message: 'Event title is required for event bookings.' });
       return;
     }
-
+  
+    const sanitizedData: BookingData = {
+      user_username: bookingData.user_username || '',
+      user_email: bookingData.user_email || '',
+      booking_type: bookingData.booking_type || 'TABLE',
+      restaurant_name: bookingData.restaurant_name || 'Smart Banquet and Resort',
+      restaurant_city: bookingData.restaurant_city || 'Chitwan',
+      booking_date: bookingData.booking_date || '',
+      start_time: bookingData.start_time || '',
+      party_size: bookingData.party_size || '',
+      special_requests: bookingData.special_requests || '',
+      event_title: bookingData.event_title || '',
+    };
+  
     setStatus({ type: null, message: 'Submitting booking...' });
-
+  
     if (formRef.current) {
       emailjs
         .sendForm(
-          'YOUR_SERVICE_ID',
-          'YOUR_TEMPLATE_ID',
+          'smart_garden_restaurant',
+          'template_mxgpb7k',
           formRef.current,
-          'YOUR_PUBLIC_KEY'
+          '42gma15X3fCcZ1vY-'
         )
         .then(
           () => {
@@ -110,7 +127,7 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
             setBookingData({
               user_username: '',
               user_email: '',
-              booking_type: 'TABLE',
+              booking_type: '',
               restaurant_name: 'Smart Banquet and Resort',
               restaurant_city: 'Chitwan',
               booking_date: '',
@@ -126,9 +143,12 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
           },
           (error) => {
             setStatus({ type: 'error', message: 'Failed to submit booking. Please try again.' });
-            console.error('EmailJS error:', error.text);
+            console.error('EmailJS error:', error.text || error);
           }
         );
+    } else {
+      setStatus({ type: 'error', message: 'Form reference is missing.' });
+      console.error('formRef is null');
     }
   };
 
@@ -137,7 +157,7 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
       <motion.section
         className="relative h-[80vh] bg-cover bg-center flex items-center justify-center text-center"
         style={{
-          backgroundImage: `url('https://scontent.fktm8-1.fna.fbcdn.net/v/t39.30808-6/489424754_1225216699608811_8514505831936378815_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_ohc=RkSHLdrveRsQ7kNvwFmixq7&_nc_oc=AdkV8rZencP35ifqu8jqOwflYDbfsPIlR8x5FcSth-afyBTmnp1UsZvUJf_wDkioXNCzX_lVI2ObB-wqAGfQu7nO&_nc_zt=23&_nc_ht=scontent.fktm8-1.fna&_nc_gid=15xOGBujKt2TlvLS4OzObw&oh=00_AfLxeZ4mtcusW3UnIAHNc8xQ7gJvurPFGxgp2FFZQT-fOQ&oe=6841AE9D')`,
+          backgroundImage: `url('${indoor3}')`,
         }}
         variants={sectionVariants}
         initial="hidden"
@@ -150,13 +170,13 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
             className="text-5xl font-bold text-white mb-4"
             variants={textVariants}
           >
-            Welcome to Smart Banquet
+            Welcome to Smart Garden and Restaurant
           </motion.h1>
           <motion.p
             className="text-lg text-white max-w-2xl mx-auto mb-6"
             variants={textVariants}
           >
-            Experience luxury and comfort at Smart Banquet, nestled in the heart of Chitwan, Nepal. 
+            Experience luxury and comfort at Smart Garden and Restauarnt, nestled in the heart of Chitwan, Nepal. 
             Enjoy world-class amenities, exquisite dining, and a serene environment perfect for your next getaway.
           </motion.p>
           <motion.button

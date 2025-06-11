@@ -62,7 +62,7 @@ const Header: React.FC<HeaderProps> = () => {
         <motion.div whileHover="hover" variants={iconVariants}>
           <EnvelopeClosedIcon className="w-5 h-5" />
         </motion.div>
-        <span className="text-xs sm:text-sm md:text-sm lg:text-base">+056-420264</span>
+        <span className="text-xs sm:text-sm md:text-sm lg:text-base">+056-420264 / 9761080860</span>
       </motion.div>
     </motion.header>
   );

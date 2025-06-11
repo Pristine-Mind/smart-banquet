@@ -93,7 +93,7 @@ const Footer: React.FC<FooterProps> = () => {
               </li>
               <li className="flex items-center space-x-2">
                 <FaPhone className="w-5 h-5 text-[#D4AF37]" />
-                <span className='font-semibold'>+977 9855010590 / 056-420264</span>
+                <span className='font-semibold'>+977 9855010590 / 056-420264 / 9761080860 </span>
               </li>
               <li className="flex items-center space-x-2">
                 <EnvelopeOpenIcon className="w-5 h-5 text-[#D4AF37]" />

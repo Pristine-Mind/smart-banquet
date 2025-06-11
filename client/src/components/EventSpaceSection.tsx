@@ -9,7 +9,7 @@ const spaces = [
   {
     name: 'Grand Banquet Hall',
     image: hall2,
-    description: 'Our Grand Banquet Hall is perfect for weddings and large celebrations, accommodating up to 200 guests with elegant decor.',
+    description: 'Our Grand Banquet Hall is perfect for weddings and large celebrations, accommodating up to 1000 guests with elegant decor.',
   },
   {
     name: 'Private Dining Room',
@@ -19,7 +19,7 @@ const spaces = [
   {
     name: 'Outdoor Party Terrace',
     image: garden,
-    description: 'Host your next event on our Outdoor Party Terrace, offering a vibrant setting for up to 100 guests with stunning views.',
+    description: 'Host your next event on our Outdoor Party Terrace, offering a vibrant setting for up to 1000 guests with stunning views.',
   },
 ];
 

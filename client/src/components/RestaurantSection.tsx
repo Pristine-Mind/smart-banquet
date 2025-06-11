@@ -58,6 +58,7 @@ interface BookingData {
   start_time: string;
   party_size: string;
   special_requests: string;
+  contact_number: string;
 }
 
 const RestaurantSection: React.FC<RestaurantSectionProps> = () => {
@@ -72,6 +73,7 @@ const RestaurantSection: React.FC<RestaurantSectionProps> = () => {
     start_time: '',
     party_size: '',
     special_requests: '',
+    contact_number: '',
   });
   const [status, setStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
   const formRef = useRef<HTMLFormElement>(null);
@@ -112,6 +114,7 @@ const RestaurantSection: React.FC<RestaurantSectionProps> = () => {
               start_time: '',
               party_size: '',
               special_requests: '',
+              contact_number: '',
             });
             setTimeout(() => {
               setIsModalOpen(false);
@@ -358,6 +361,20 @@ const RestaurantSection: React.FC<RestaurantSectionProps> = () => {
                   />
                 </div>
                 <div>
+                    <label htmlFor="user_email" className="block text-gray-700 font-medium mb-1">
+                      Contact Number
+                    </label>
+                    <input
+                      type="tel"
+                      id="contact_number"
+                      name="contact_number"
+                      value={bookingData.contact_number}
+                      onChange={handleChange}
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452A]"
+                      required
+                    />
+                </div>
+                <div>
                   <label htmlFor="booking_date" className="block text-gray-700 font-medium mb-1">
                     Date
                   </label>
@@ -390,21 +407,18 @@ const RestaurantSection: React.FC<RestaurantSectionProps> = () => {
                   <label htmlFor="party_size" className="block text-gray-700 font-medium mb-1">
                     Number of Guests
                   </label>
-                  <select
+                  <input
+                    type="number"
                     id="party_size"
                     name="party_size"
                     value={bookingData.party_size}
                     onChange={handleChange}
-                    className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452a]"
+                    min="1"
+                    max="2000"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452A]"
+                    placeholder="Enter number of guests"
                     required
-                  >
-                    <option value="">Select number of guests</option>
-                    {[...Array(20)].map((_, i) => (
-                      <option key={i + 1} value={i + 1}>
-                        {i + 1}
-                      </option>
-                    ))}
-                  </select>
+                  />
                 </div>
                 <div>
                   <label htmlFor="special_requests" className="block text-gray-700 font-medium mb-1">

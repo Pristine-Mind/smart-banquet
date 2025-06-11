@@ -6,6 +6,9 @@ import indoorv from '../assets/indoor.mp4'
 import indoorv1 from '../assets/indoor1.mp4'
 import indoorv2 from '../assets/indoor2.mp4'
 import outdoor from '../assets/outdoor.mp4'
+import { HomeIcon, EnvelopeOpenIcon } from '@radix-ui/react-icons';
+import { FaPhone } from 'react-icons/fa';
+
 
 const sectionVariants = {
   hidden: { opacity: 0 },
@@ -75,16 +78,32 @@ const AboutSection: React.FC<AboutSectionProps> = () => {
               A Premier Destination for Events & Getaways
             </motion.h3>
             <motion.p className="text-lg text-gray-600 leading-relaxed">
-              At Smart Banquet and Resort, we pride ourselves on crafting extraordinary experiences. Our sprawling banquet halls, meticulously designed gardens, and world-class resort amenities cater to weddings, conferences, social gatherings, and luxurious getaways.
+              At Smart Garden and Restaurant, we pride ourselves on crafting extraordinary experiences. Our sprawling banquet halls, meticulously designed gardens, and world-class resort amenities cater to weddings, conferences, social gatherings, and luxurious getaways.
             </motion.p>
             <motion.div>
               <h4 className="text-xl font-semibold text-gray-800 mb-2">Why Choose Us?</h4>
               <ul className="list-disc list-inside space-y-2 text-gray-600">
                 <li>✔ Stunning, customizable event spaces</li>
                 <li>✔ Expert event planning & catering services</li>
-                <li>✔ Luxurious accommodations for guests</li>
                 <li>✔ State-of-the-art AV & tech support</li>
                 <li>✔ Scenic outdoor venues for photography</li>
+              </ul>
+            </motion.div>
+            <motion.div>
+              <h4 className="text-xl font-bold text-black mb-4 ">Contact Us</h4>
+              <ul className="space-y-2">
+                <li className="flex items-center space-x-2">
+                  <HomeIcon className="w-5 h-5 text-[#D4AF37]" />
+                  <span className='font-semibold'>Bharatpur-12, Basanta-Chowk, Chitwan, Nepal</span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <FaPhone className="w-5 h-5 text-[#D4AF37]" />
+                  <span className='font-semibold'>+977-056-420264 / 9761080860 / 9855010590 </span>
+                </li>
+                <li className="flex items-center space-x-2">
+                  <EnvelopeOpenIcon className="w-5 h-5 text-[#D4AF37]" />
+                  <span className='font-semibold'>business.smartgarden.bharatpur@gmail.com</span>
+                </li>
               </ul>
             </motion.div>
           </motion.div>

@@ -129,7 +129,7 @@ const ContactUsSection: React.FC<ContactUsSectionProps> = () => {
             </p>
             <div className="space-y-4">
               <p className="flex items-center text-gray-600">
-                <span className="mr-2">📞</span> +977 9855010590
+                <span className="mr-2">📞</span>+977-056-420264 / 9761080860 / 9855010590
               </p>
               <p className="flex items-center text-gray-600">
                 <span className="mr-2">📧</span> business.smartgarden.bharatpur@gmail.com

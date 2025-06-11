@@ -55,6 +55,8 @@ interface BookingData {
   event_ticket_price?: string;
   total_price?: string;
   special_requests: string;
+  contact_number: string;
+
 }
 
 const HomeSection: React.FC<HomeSectionProps> = () => {
@@ -70,6 +72,7 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
     party_size: '',
     special_requests: '',
     event_title: '',
+    contact_number: '',
   });
   const [status, setStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
   const formRef = useRef<HTMLFormElement>(null);
@@ -109,6 +112,7 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
       party_size: bookingData.party_size || '',
       special_requests: bookingData.special_requests || '',
       event_title: bookingData.event_title || '',
+      contact_number: bookingData.contact_number || '',
     };
     setStatus({ type: null, message: 'Submitting booking...' });
 
@@ -134,6 +138,7 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
               party_size: '',
               special_requests: '',
               event_title: '',
+              contact_number: ''
             });
             setTimeout(() => {
               setIsModalOpen(false);
@@ -255,6 +260,20 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
                       required
                     />
                   </div>
+                  <div>
+                    <label htmlFor="user_email" className="block text-gray-700 font-medium mb-1">
+                      Contact Number
+                    </label>
+                    <input
+                      type="tel"
+                      id="contact_number"
+                      name="contact_number"
+                      value={bookingData.contact_number}
+                      onChange={handleChange}
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452A]"
+                      required
+                    />
+                  </div>
                 </div>
                 <div>
                   <label htmlFor="booking_type" className="block text-gray-700 font-medium mb-1">
@@ -307,21 +326,18 @@ const HomeSection: React.FC<HomeSectionProps> = () => {
                   <label htmlFor="party_size" className="block text-gray-700 font-medium mb-1">
                     Number of Guests
                   </label>
-                  <select
+                  <input
+                    type="number"
                     id="party_size"
                     name="party_size"
                     value={bookingData.party_size}
                     onChange={handleChange}
+                    min="1"
+                    max="2000"
                     className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#62452A]"
+                    placeholder="Enter number of guests"
                     required
-                  >
-                    <option value="">Select number of guests</option>
-                    {[...Array(20)].map((_, i) => (
-                      <option key={i + 1} value={i + 1}>
-                        {i + 1}
-                      </option>
-                    ))}
-                  </select>
+                  />
                 </div>
                 {bookingData.booking_type === 'EVENT' && (
                   <div>
